@@ -3,50 +3,162 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ReVive IMPACT - Header</title>
+  <title>ReVive IMPACT - Contact Log</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Fixed Header -->
-  <header>
-    <div class="header-left">
-      <div class="logo"><img src="ReVive-IMPACT-Logo.png" alt="ReVive IMPACT Logo" class="logo-image"></div>
-      <nav>
-        <a href="index.html" class="nav-tab nav-tab-active">CONTACT LOG</a>
-        <!-- Prospects tab removed as requested -->
-        <a href="outreach.html" class="nav-tab nav-tab-inactive">OUTREACH</a>
-        <a href="cm-ot.html" class="nav-tab nav-tab-inactive">CM/OT</a>
-        <a href="clients.html" class="nav-tab nav-tab-inactive">CLIENTS</a>
-        <a href="dashboard.html" class="nav-tab nav-tab-inactive">DASHBOARD</a>
-      </nav>
-    </div>
+  <!-- Header will be loaded from header.html -->
+  <div id="header-container"></div>
 
-    <div class="header-right">
-      <div class="user-info">
-        <span id="currentUserName">Andrea Leflore</span>
-        <div class="user-avatar"></div>
-      </div>
-      <button class="sign-out" id="signOutBtn">Sign Out</button>
-    </div>
-  </header>
+  <!-- Main Content -->
+  <div class="page-title-section">
+    <h1 class="page-title">Contact Log</h1>
+    <p class="page-subtitle">Track client engagement and provided services</p>
+  </div>
 
-  <!-- Secondary Action Bar -->
-  <div class="secondary-action-bar">
-    <div class="secondary-action-bar-left">
-      <!-- Client search moved to action bar as the first item -->
-      <div class="action-bar-search-container">
-        <input type="text" class="action-bar-search-input" id="actionBarClientSearch" placeholder=" ">
-        <span class="action-bar-search-label">Client Search</span>
-        <div class="suggestions-container" id="actionBarSearchSuggestions"></div>
+  <div class="main-container">
+    <div class="filter-controls">
+      <div class="filter-group">
+        <label for="showFilter">Show</label>
+        <select id="showFilter" class="filter-select">
+          <option value="today" selected>Today</option>
+          <option value="yesterday">Yesterday</option>
+          <option value="thisWeek">This Week</option>
+          <option value="thisMonth">This Month</option>
+          <option value="custom">Custom Date...</option>
+        </select>
       </div>
       
-      <!-- Other filter controls will be added by each page -->
+      <div class="filter-group">
+        <label for="providerFilter">Provider</label>
+        <select id="providerFilter" class="filter-select">
+          <option value="all" selected>All</option>
+          <!-- Providers will be loaded dynamically -->
+        </select>
+      </div>
+      
+      <button id="quickCheckInBtn" class="btn btn-primary">Quick Check-In</button>
     </div>
-    <div class="secondary-action-bar-right">
-      <!-- Additional action buttons can be added here -->
+
+    <!-- Table Container -->
+    <div class="table-container">
+      <!-- Scrollable Content -->
+      <div class="table-content">
+        <div class="table-rows-container">
+          <!-- Table header -->
+          <div class="table-row header-row">
+            <!-- Fixed Columns Header -->
+            <div class="fixed-columns">
+              <div class="column-header col-date sortable" data-sort="date">Date <span class="sort-icon">↓</span></div>
+              <div class="column-header col-days sortable" data-sort="daysAgo">Days Ago <span class="sort-icon">↓</span></div>
+              <div class="column-header col-provider sortable" data-sort="provider">Provider <span class="sort-icon">↓</span></div>
+              <div class="column-header col-client sortable" data-sort="client">Client <span class="sort-icon">↓</span></div>
+            </div>
+
+            <!-- Scrollable Columns Header -->
+            <div class="scrollable-columns">
+              <div class="column-header col-service">Place of Service <span class="sort-icon">↓</span></div>
+              <div class="column-header col-accompanied">Accompanied Appointment? <span class="sort-icon">↓</span></div>
+              <div class="column-header col-documentation">Obtained Documentation <span class="sort-icon">↓</span></div>
+              <div class="column-header col-resources">Resources Given <span class="sort-icon">↓</span></div>
+              <div class="column-header col-health">On-Site Health Care Received <span class="sort-icon">↓</span></div>
+              <div class="column-header col-program">Program Started <span class="sort-icon">↓</span></div>
+              <div class="column-header col-housing">Housing Entered <span class="sort-icon">↓</span></div>
+              <div class="column-header col-counted">? (Counted Columns) <span class="sort-icon">↓</span></div>
+              <div class="column-header col-notes">Notes <span class="sort-icon">↓</span></div>
+              <div class="column-header col-status">Program at Status <span class="sort-icon">↓</span></div>
+            </div>
+          </div>
+
+          <!-- Table rows will be loaded dynamically here -->
+          <div id="contact-log-rows">
+            <!-- Rows will be inserted here via JavaScript -->
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
+  <!-- Client Dialog -->
+  <div id="clientDialog" class="dialog-overlay">
+    <div class="dialog-content">
+      <div class="dialog-header">
+        <h3 id="dialogClientName">Client Name</h3>
+        <button class="dialog-close" id="dialogCloseBtn">&times;</button>
+      </div>
+
+      <div id="dialogInitialOptions" class="dialog-body">
+        <p class="dialog-prompt">What would you like to do?</p>
+        <div class="dialog-options">
+          <button id="quickCheckInBtn" class="btn btn-primary">Quick Check-In</button>
+          <button id="addServiceBtn" class="btn btn-primary" style="display: none;">Add Service</button>
+          <button id="clientHistoryBtn" class="btn btn-primary">Log History</button>
+          <button id="initialCancelBtn" class="btn btn-secondary">Cancel</button>
+        </div>
+      </div>
+
+      <div id="dialogCheckInForm" class="dialog-body" style="display: none;">
+        <p class="dialog-prompt">Client objective for visiting today:</p>
+        <div class="form-group">
+          <div class="multi-select-container">
+            <div>
+              <div class="checkbox-group">
+                <label><input type="checkbox" name="objective" value="Case Management"> Case Management (CM)</label>
+              </div>
+              <div class="checkbox-group">
+                <label><input type="checkbox" name="objective" value="Employment"> Employment Services</label>
+              </div>
+              <div class="checkbox-group">
+                <label><input type="checkbox" name="objective" value="Food"> Food</label>
+              </div>
+              <div class="checkbox-group">
+                <label><input type="checkbox" name="objective" value="Healthcare"> Healthcare</label>
+              </div>
+              <div class="checkbox-group">
+                <label><input type="checkbox" name="objective" value="Housing"> Housing Support</label>
+              </div>
+            </div>
+            <div>
+              <div class="checkbox-group">
+                <label><input type="checkbox" name="objective" value="ID"> ID/Documentation</label>
+              </div>
+              <div class="checkbox-group">
+                <label><input type="checkbox" name="objective" value="Laundry"> Laundry</label>
+              </div>
+              <div class="checkbox-group">
+                <label><input type="checkbox" name="objective" value="Occupational"> Occupational Therapy (OT)</label>
+              </div>
+              <div class="checkbox-group">
+                <label><input type="checkbox" name="objective" value="Recreation"> Recreation</label>
+              </div>
+              <div class="checkbox-group">
+                <label><input type="checkbox" name="objective" value="Other"> Other</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 24px; margin-bottom: 24px;">
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="accessedFood" value="Yes"> Client accessed food</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <p class="form-label">Comments:</p>
+          <textarea id="visitComments" rows="4" class="form-control" placeholder="Enter any additional notes or comments here..."></textarea>
+        </div>
+
+        <div class="dialog-options">
+          <button id="dialogCancelBtn" class="btn btn-secondary">Cancel</button>
+          <button id="dialogSubmitBtn" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
   <script src="code.js"></script>
 </body>
 </html>
