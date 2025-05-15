@@ -5,6 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ReVive IMPACT - Header</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Additional styles to ensure vertical centering in action bar */
+    .secondary-action-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center; /* Ensure vertical centering */
+      padding: 0 16px;
+      background-color: var(--md-surface);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      height: 52px;
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      width: 100%;
+      z-index: 999;
+    }
+    
+    .secondary-action-bar-left {
+      display: flex;
+      align-items: center; /* Ensure vertical centering */
+      gap: 16px;
+      flex: 1; /* Allow it to take available space */
+    }
+    
+    .secondary-action-bar-right {
+      display: flex;
+      align-items: center; /* Ensure vertical centering */
+      gap: 8px;
+    }
+    
+    /* Style for search in action bar */
+    .action-bar-search-container {
+      position: relative;
+      width: 300px;
+    }
+    
+    .action-bar-search-input {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--md-outline);
+      border-radius: var(--md-shape-corner-small);
+      font-size: var(--md-body-medium-font);
+    }
+    
+    .action-bar-search-label {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--md-on-surface-variant);
+      pointer-events: none;
+      transition: all 0.2s ease;
+      font-size: var(--md-body-medium-font);
+    }
+    
+    .action-bar-search-input:focus + .action-bar-search-label,
+    .action-bar-search-input:not(:placeholder-shown) + .action-bar-search-label {
+      opacity: 0;
+    }
+  </style>
 </head>
 <body>
   <!-- Fixed Header -->
@@ -13,19 +74,15 @@
       <div class="logo"><img src="ReVive-IMPACT-Logo.png" alt="ReVive IMPACT Logo" class="logo-image"></div>
       <nav>
         <a href="index.html" class="nav-tab nav-tab-active">CONTACT LOG</a>
-        <a href="prospects.html" class="nav-tab nav-tab-inactive">PROSPECTS</a>
+        <!-- Prospects tab removed as requested -->
         <a href="outreach.html" class="nav-tab nav-tab-inactive">OUTREACH</a>
         <a href="cm-ot.html" class="nav-tab nav-tab-inactive">CM/OT</a>
+        <a href="clients.html" class="nav-tab nav-tab-inactive">CLIENTS</a>
         <a href="dashboard.html" class="nav-tab nav-tab-inactive">DASHBOARD</a>
       </nav>
     </div>
 
     <div class="header-right">
-      <div class="search-container">
-        <input type="text" class="search-input" id="clientSearchInput" placeholder=" ">
-        <span class="search-label">Client Search</span>
-        <div class="suggestions-container" id="searchSuggestions"></div>
-      </div>
       <div class="user-info">
         <span id="currentUserName">Andrea Leflore</span>
         <div class="user-avatar"></div>
@@ -37,7 +94,14 @@
   <!-- Secondary Action Bar -->
   <div class="secondary-action-bar">
     <div class="secondary-action-bar-left">
-      <!-- Filter controls will be added by each page -->
+      <!-- Client search moved to action bar as the first item -->
+      <div class="action-bar-search-container">
+        <input type="text" class="action-bar-search-input" id="actionBarClientSearch" placeholder=" ">
+        <span class="action-bar-search-label">Client Search</span>
+        <div class="suggestions-container" id="actionBarSearchSuggestions"></div>
+      </div>
+      
+      <!-- Other filter controls will be added by each page -->
     </div>
     <div class="secondary-action-bar-right">
       <!-- Additional action buttons can be added here -->
