@@ -5,67 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ReVive IMPACT - Header</title>
   <link rel="stylesheet" href="styles.css">
-  <style>
-    /* Additional styles to ensure vertical centering in action bar */
-    .secondary-action-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center; /* Ensure vertical centering */
-      padding: 0 16px;
-      background-color: var(--md-surface);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-      height: 52px;
-      position: fixed;
-      top: 64px;
-      left: 0;
-      right: 0;
-      width: 100%;
-      z-index: 999;
-    }
-    
-    .secondary-action-bar-left {
-      display: flex;
-      align-items: center; /* Ensure vertical centering */
-      gap: 16px;
-      flex: 1; /* Allow it to take available space */
-    }
-    
-    .secondary-action-bar-right {
-      display: flex;
-      align-items: center; /* Ensure vertical centering */
-      gap: 8px;
-    }
-    
-    /* Style for search in action bar */
-    .action-bar-search-container {
-      position: relative;
-      width: 300px;
-    }
-    
-    .action-bar-search-input {
-      width: 100%;
-      padding: 8px 12px;
-      border: 1px solid var(--md-outline);
-      border-radius: var(--md-shape-corner-small);
-      font-size: var(--md-body-medium-font);
-    }
-    
-    .action-bar-search-label {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--md-on-surface-variant);
-      pointer-events: none;
-      transition: all 0.2s ease;
-      font-size: var(--md-body-medium-font);
-    }
-    
-    .action-bar-search-input:focus + .action-bar-search-label,
-    .action-bar-search-input:not(:placeholder-shown) + .action-bar-search-label {
-      opacity: 0;
-    }
-  </style>
 </head>
 <body>
   <!-- Fixed Header -->
@@ -107,5 +46,7 @@
       <!-- Additional action buttons can be added here -->
     </div>
   </div>
+
+  <script src="code.js"></script>
 </body>
 </html>
