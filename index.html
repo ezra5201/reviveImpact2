@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ReVive IMPACT - Contact Log</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Header will be loaded from header.html -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   <div id="header-container"></div>
 
-  <!-- Main Content -->
-  <div class="page-title-section">
+  <main id="main-content" class="page-title-section" role="main">
     <h1 class="page-title">Contact Log</h1>
     <p class="page-subtitle">Track client engagement and provided services</p>
-  </div>
+  </main>
 
   <div class="main-container">
     <div class="filter-controls">
@@ -28,136 +27,36 @@
           <option value="custom">Custom Date...</option>
         </select>
       </div>
-      
       <div class="filter-group">
         <label for="providerFilter">Provider</label>
         <select id="providerFilter" class="filter-select">
           <option value="all" selected>All</option>
-          <!-- Providers will be loaded dynamically -->
         </select>
       </div>
-      
       <button id="quickCheckInBtn" class="btn btn-primary">Quick Check-In</button>
     </div>
 
-    <!-- Table Container -->
     <div class="table-container">
-      <!-- Scrollable Content -->
       <div class="table-content">
         <div class="table-rows-container">
-          <!-- Table header -->
-          <div class="table-row header-row">
-            <!-- Fixed Columns Header -->
+          <!-- Header row & dynamic rows injected -->
+          <div class="table-row header-row md3-elevation-1">
             <div class="fixed-columns">
-              <div class="column-header col-date sortable" data-sort="date">Date <span class="sort-icon">↓</span></div>
-              <div class="column-header col-days sortable" data-sort="daysAgo">Days Ago <span class="sort-icon">↓</span></div>
-              <div class="column-header col-provider sortable" data-sort="provider">Provider <span class="sort-icon">↓</span></div>
-              <div class="column-header col-client sortable" data-sort="client">Client <span class="sort-icon">↓</span></div>
+              <div class="column-header col-date sortable" data-sort="date">Date</div>
+              <div class="column-header col-days sortable" data-sort="daysAgo">Days Ago</div>
+              <div class="column-header col-provider sortable" data-sort="provider">Provider</div>
+              <div class="column-header col-client sortable" data-sort="client">Client</div>
             </div>
-
-            <!-- Scrollable Columns Header -->
             <div class="scrollable-columns">
-              <div class="column-header col-service">Place of Service <span class="sort-icon">↓</span></div>
-              <div class="column-header col-accompanied">Accompanied Appointment? <span class="sort-icon">↓</span></div>
-              <div class="column-header col-documentation">Obtained Documentation <span class="sort-icon">↓</span></div>
-              <div class="column-header col-resources">Resources Given <span class="sort-icon">↓</span></div>
-              <div class="column-header col-health">On-Site Health Care Received <span class="sort-icon">↓</span></div>
-              <div class="column-header col-program">Program Started <span class="sort-icon">↓</span></div>
-              <div class="column-header col-housing">Housing Entered <span class="sort-icon">↓</span></div>
-              <div class="column-header col-counted">? (Counted Columns) <span class="sort-icon">↓</span></div>
-              <div class="column-header col-notes">Notes <span class="sort-icon">↓</span></div>
-              <div class="column-header col-status">Program at Status <span class="sort-icon">↓</span></div>
+              <!-- other column headers -->
             </div>
           </div>
-
-          <!-- Table rows will be loaded dynamically here -->
-          <div id="contact-log-rows">
-            <!-- Rows will be inserted here via JavaScript -->
-          </div>
+          <div id="contact-log-rows"></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Client Dialog -->
-  <div id="clientDialog" class="dialog-overlay">
-    <div class="dialog-content">
-      <div class="dialog-header">
-        <h3 id="dialogClientName">Client Name</h3>
-        <button class="dialog-close" id="dialogCloseBtn">&times;</button>
-      </div>
-
-      <div id="dialogInitialOptions" class="dialog-body">
-        <p class="dialog-prompt">What would you like to do?</p>
-        <div class="dialog-options">
-          <button id="quickCheckInBtn" class="btn btn-primary">Quick Check-In</button>
-          <button id="addServiceBtn" class="btn btn-primary" style="display: none;">Add Service</button>
-          <button id="clientHistoryBtn" class="btn btn-primary">Log History</button>
-          <button id="initialCancelBtn" class="btn btn-secondary">Cancel</button>
-        </div>
-      </div>
-
-      <div id="dialogCheckInForm" class="dialog-body" style="display: none;">
-        <p class="dialog-prompt">Client objective for visiting today:</p>
-        <div class="form-group">
-          <div class="multi-select-container">
-            <div>
-              <div class="checkbox-group">
-                <label><input type="checkbox" name="objective" value="Case Management"> Case Management (CM)</label>
-              </div>
-              <div class="checkbox-group">
-                <label><input type="checkbox" name="objective" value="Employment"> Employment Services</label>
-              </div>
-              <div class="checkbox-group">
-                <label><input type="checkbox" name="objective" value="Food"> Food</label>
-              </div>
-              <div class="checkbox-group">
-                <label><input type="checkbox" name="objective" value="Healthcare"> Healthcare</label>
-              </div>
-              <div class="checkbox-group">
-                <label><input type="checkbox" name="objective" value="Housing"> Housing Support</label>
-              </div>
-            </div>
-            <div>
-              <div class="checkbox-group">
-                <label><input type="checkbox" name="objective" value="ID"> ID/Documentation</label>
-              </div>
-              <div class="checkbox-group">
-                <label><input type="checkbox" name="objective" value="Laundry"> Laundry</label>
-              </div>
-              <div class="checkbox-group">
-                <label><input type="checkbox" name="objective" value="Occupational"> Occupational Therapy (OT)</label>
-              </div>
-              <div class="checkbox-group">
-                <label><input type="checkbox" name="objective" value="Recreation"> Recreation</label>
-              </div>
-              <div class="checkbox-group">
-                <label><input type="checkbox" name="objective" value="Other"> Other</label>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group" style="margin-top: 24px; margin-bottom: 24px;">
-          <div class="checkbox-group">
-            <label><input type="checkbox" name="accessedFood" value="Yes"> Client accessed food</label>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <p class="form-label">Comments:</p>
-          <textarea id="visitComments" rows="4" class="form-control" placeholder="Enter any additional notes or comments here..."></textarea>
-        </div>
-
-        <div class="dialog-options">
-          <button id="dialogCancelBtn" class="btn btn-secondary">Cancel</button>
-          <button id="dialogSubmitBtn" class="btn btn-primary">Submit</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Scripts -->
   <script src="data.js"></script>
   <script src="code.js"></script>
 </body>

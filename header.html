@@ -1,50 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ReVive IMPACT - Header</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Fixed Header -->
-  <header>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <!-- Header Container -->
+  <header class="md3-header md3-elevation-3">
     <div class="header-left">
-      <div class="logo"><img src="ReVive-IMPACT-Logo.png" alt="ReVive IMPACT Logo" class="logo-image"></div>
-      <nav>
-        <a href="index.html" class="nav-tab nav-tab-active">CONTACT LOG</a>
-        <a href="outreach.html" class="nav-tab nav-tab-inactive">OUTREACH</a>
+      <div class="logo">
+        <a href="index.html" aria-label="ReVive IMPACT Home">
+          <img src="ReVive-IMPACT-Logo.png" alt="ReVive IMPACT Logo" class="logo-image" />
+        </a>
+      </div>
+      <button class="hamburger-menu" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <nav id="nav-menu" role="navigation" aria-label="Main navigation">
+        <a href="index.html" class="nav-tab nav-tab-active" aria-current="page">Contact Log</a>
+        <a href="outreach.html" class="nav-tab nav-tab-inactive">Outreach</a>
         <a href="cm-ot.html" class="nav-tab nav-tab-inactive">CM/OT</a>
-        <a href="dashboard.html" class="nav-tab nav-tab-inactive">DASHBOARD</a>
+        <a href="dashboard.html" class="nav-tab nav-tab-inactive">Dashboard</a>
       </nav>
     </div>
-
     <div class="header-right">
       <div class="user-info">
         <span id="currentUserName">Andrea Leflore</span>
-        <div class="user-avatar"></div>
+        <div class="user-avatar" aria-hidden="true"></div>
       </div>
-      <button class="sign-out" id="signOutBtn">Sign Out</button>
+      <button class="btn sign-out" id="signOutBtn">Sign Out</button>
     </div>
   </header>
 
   <!-- Secondary Action Bar -->
-  <div class="secondary-action-bar">
+  <div class="secondary-action-bar md3-elevation-1" role="region" aria-label="Action bar">
     <div class="secondary-action-bar-left">
-      <!-- Client search moved to action bar as the first item -->
       <div class="action-bar-search-container">
-        <input type="text" class="action-bar-search-input" id="actionBarClientSearch" placeholder=" ">
+        <input type="text" class="action-bar-search-input" id="actionBarClientSearch" placeholder=" " aria-label="Client Search" />
         <span class="action-bar-search-label">Client Search</span>
         <div class="suggestions-container" id="actionBarSearchSuggestions"></div>
       </div>
-      
-      <!-- Other filter controls will be added by each page -->
+      <!-- Other filter controls injected dynamically -->
     </div>
-    <div class="secondary-action-bar-right">
-      <!-- Additional action buttons can be added here -->
-    </div>
+    <div class="secondary-action-bar-right"></div>
   </div>
 
+  <div id="header-container"></div>
   <script src="code.js"></script>
 </body>
 </html>
